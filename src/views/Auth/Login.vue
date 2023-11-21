@@ -17,52 +17,66 @@
         </div>
         <form @submit.prevent="login" class="">
           <div class="mb-4">
-    <label for="email-address-icon" class="block mb-2 text-sm font-thin text-white">Email:</label>
-    <div class="relative">
-        <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
-            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
-                <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z"/>
-                <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z"/>
-            </svg>
-        </div>
-        <input
-            type="text"
-            id="email-address-icon"
-            class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring focus:ring-indigo-200 focus:outline-none block w-full pl-10 p-2.5"
-            placeholder="exemplo@finance.com"
-            v-model="email"
-        />
-    </div>
-</div>
+            <label
+              for="email-address-icon"
+              class="block mb-2 text-sm font-thin text-white"
+              >Email:</label
+            >
+            <div class="relative">
+              <div
+                class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none"
+              >
+                <svg
+                  class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 20 16"
+                >
+                  <path
+                    d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z"
+                  />
+                  <path
+                    d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z"
+                  />
+                </svg>
+              </div>
+              <input
+                type="text"
+                id="email-address-icon"
+                class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring focus:ring-indigo-200 focus:outline-none block w-full pl-10 p-2.5"
+                placeholder="exemplo@finance.com"
+                v-model="email"
+              />
+            </div>
+          </div>
 
-<div class="mb-4">
-    <label for="password" class="block text-sm font-thin text-white">Senha:</label>
-    <input
-        type="password"
-        id="password"
-        v-model="password"
-        required
-        class="mt-1 p-2 rounded-md w-full border border-gray-300 focus:ring focus:ring-indigo-200 focus:outline-none text-black-500"
-        placeholder="senha"
-    />
-</div>
+          <div class="mb-4">
+            <label for="password" class="block text-sm font-thin text-white"
+              >Senha:</label
+            >
+            <input
+              type="password"
+              id="password"
+              v-model="password"
+              required
+              class="mt-1 p-2 rounded-md w-full border border-gray-300 focus:ring focus:ring-indigo-200 focus:outline-none text-black-500"
+              placeholder="senha"
+            />
+          </div>
 
-
-          <div class="flex flex-row mt-2 ">
+          <div class="flex flex-row mt-2">
             <label
               class="relative inline-flex items-center mb-5 cursor-pointer"
             >
-              <input type="checkbox" value="" class="sr-only peer" disabled />
+              <input type="checkbox" value="" class="sr-only peer" />
               <div
                 class="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
               ></div>
-              <span
-                class="ml-2 mr-[60px] text-sm font-thin text-white-400"
+              <span class="ml-2 mr-[60px] text-sm font-thin text-white-400"
                 >Lembrar de mim</span
               >
             </label>
-
-         
           </div>
 
           <button
@@ -73,9 +87,28 @@
           </button>
 
         
-          <!-- <router-link to="/registrar" class="m-5 text-center align-center text-white"
-            >Não possuo uma conta</router-link
-          > -->
+
+          <div class="LoginGoogle text-center mt-6">
+          <button
+            type="button"
+            class="mt-2 text-white bg-[#050708] hover:bg-[#050708]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 mb-2"
+          >
+            <svg
+              class="w-4 h-4 me-2"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              viewBox="0 0 18 19"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M8.842 18.083a8.8 8.8 0 0 1-8.65-8.948 8.841 8.841 0 0 1 8.8-8.652h.153a8.464 8.464 0 0 1 5.7 2.257l-2.193 2.038A5.27 5.27 0 0 0 9.09 3.4a5.882 5.882 0 0 0-.2 11.76h.124a5.091 5.091 0 0 0 5.248-4.057L14.3 11H9V8h8.34c.066.543.095 1.09.088 1.636-.086 5.053-3.463 8.449-8.4 8.449l-.186-.002Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            Sign in with Google
+          </button>
+        </div>
 
           <p class="pt-2 text-green-500">{{ messagem }}</p>
         </form>

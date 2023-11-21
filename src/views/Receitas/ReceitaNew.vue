@@ -76,14 +76,14 @@
       <button
         type="submit"
         v-if="isNewReceita"
-        class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+        class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-green-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-green-700 focus:z-10 focus:ring-4 focus:ring-gray-200"
       >
         Adicionar Receita
       </button>
       <button
         type="submit"
         v-else
-        class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+        class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-green-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-green-700 focus:z-10 focus:ring-4 focus:ring-gray-200"
       >
         Atualizar Receita
       </button>

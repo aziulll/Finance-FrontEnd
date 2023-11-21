@@ -94,9 +94,12 @@
           </tr>
         </tbody>
       </table>
+      
     </div>
 
-    <!-- <div class="flex flex-col-reverse items-center">
+    
+
+    <div class="flex flex-col-reverse items-center">
       <span class="text-sm"></span>
 
       <div class="inline-flex mt-2 xs:mt-0">
@@ -143,7 +146,7 @@
           </svg>
         </button>
       </div>
-    </div> -->
+    </div>
   </main>
 </template>
   
