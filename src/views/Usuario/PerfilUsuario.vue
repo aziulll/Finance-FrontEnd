@@ -3,8 +3,7 @@
     <h1 class="text-3xl font-bold mb-6">Configurações do usuário</h1>
     <span
       class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300"
-      >Adm</span
-    >
+      v-if="adm">Adm</span>
     <div class="grid grid-rows-1 md:grid-cols-2 lg:grid-rows-1 gap-6">
       <div class="">
         <div v-if="user && user.name" class="pt-4">
@@ -53,18 +52,18 @@
 </template>
 <script>
 import axios from "axios";
-import { useUserStore } from '../../stores/UserStore';
+import { useUserStore } from "../../stores/UserStore";
 
 export default {
   data() {
     return {
       user: null,
+      isAdm: false,
     };
   },
   mounted() {
-    const userStore = useUserStore(); // Obtém a instância do seu store
-
-    // Se você tem o userId no seu store, use-o
+    const userStore = useUserStore(); 
+   
     const userId = userStore.userId;
 
     if (!userId) {
@@ -77,6 +76,15 @@ export default {
         .get(`http://127.0.0.1:8000/api/usuarios/${userId}`)
         .then((response) => {
           this.user = response.data;
+
+          if (this.user.is_Adm) {
+            this.isAdm = true
+            
+          } else {
+            console.log("O usuário não é um administrador");
+            
+          }
+
         });
     } catch (error) {
       console.error("Error fetching user:", error);

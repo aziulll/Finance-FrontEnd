@@ -8,6 +8,7 @@ import DespesasList from '../views/Despesas/DespesasList.vue'
 import Home from '../views/Home.vue'
 import ReceitaNew from '@/views/Receitas/ReceitaNew.vue'
 import Perfil from '@/views/Usuario/PerfilUsuario.vue'
+import Solicitacao from '@/views/Auth/Solicitacao.vue'
 
 import UsuariosList from '@/views/Usuario/UsuariosList.vue'
 
@@ -20,11 +21,13 @@ const router = createRouter({
     {
       path: '/registrar', component: Registro
     },
+    { path: '/solicitacao', component: Solicitacao },
+
     {
 
       path: '/about', component: Dashboard,
       children: [
-      
+
         { path: '/receitas', component: ReceitaList },
         { path: '/despesas', component: DespesasList },
         { path: '/home', component: Home },
@@ -33,8 +36,8 @@ const router = createRouter({
 
 
 
-        {path:'/usuarios', component: UsuariosList},
-        {path: '/perfil', component: Perfil}
+        { path: '/usuarios', component: UsuariosList },
+        { path: '/perfil', component: Perfil }
 
       ]
 

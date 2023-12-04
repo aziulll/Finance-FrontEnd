@@ -1,6 +1,9 @@
 <template>
+
+  <div class="mt-4">
+    <h1 class="text-2xl font-bold">Usuários</h1>
   <div class="mt-6">
-    <div v-if="users.length > 0">
+    <div >
       <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
         <thead>
           <tr>
@@ -15,11 +18,11 @@
           </tr>
         </tbody>
       </table>
+
     </div>
-    <div v-else>
-      <p>Nenhum usuário encontrado.</p>
-    </div>
+   
   </div>
+</div>
 </template>
 
 <script>

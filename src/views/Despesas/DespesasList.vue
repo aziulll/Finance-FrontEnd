@@ -64,7 +64,7 @@
       <table class="w-full text-sm text-left text-gray-500">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50">
           <tr>
-            <th scope="col" class="px-6 py-3">#</th>
+           
             <th scope="col" class="px-6 py-3">Nome</th>
             <th scope="col" class="px-6 py-3">Valor</th>
             <th scope="col" class="px-6 py-3">Categoria</th>
@@ -77,12 +77,7 @@
             :key="despesa.id"
             class="bg-white border-b hover:bg-gray-50"
           >
-            <th
-              scope="row"
-              class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
-            >
-              {{ despesa.id }}
-            </th>
+         
             <td class="px-6 py-4">
               {{ despesa.nome }}
             </td>

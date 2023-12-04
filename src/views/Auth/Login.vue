@@ -52,31 +52,41 @@
           </div>
 
           <div class="mb-4">
-            <label for="password" class="block text-sm font-thin text-white"
+            <label
+              for="password"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >Senha:</label
             >
             <input
               type="password"
               id="password"
               v-model="password"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring focus:ring-indigo-200 focus:outline-none block w-full p-2.5"
+              placeholder="•••••••••"
               required
-              class="mt-1 p-2 rounded-md w-full border border-gray-300 focus:ring focus:ring-indigo-200 focus:outline-none text-black-500"
-              placeholder="senha"
             />
           </div>
-
           <div class="flex flex-row mt-2">
-            <label
-              class="relative inline-flex items-center mb-5 cursor-pointer"
-            >
-              <input type="checkbox" value="" class="sr-only peer" />
-              <div
-                class="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
-              ></div>
-              <span class="ml-2 mr-[60px] text-sm font-thin text-white-400"
-                >Lembrar de mim</span
+            <div class="flex items-center mb-4">
+              <input
+                id="default-checkbox"
+                type="checkbox"
+                value=""
+                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+              />
+              <label
+                for="default-checkbox"
+                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                >Manter conectado</label
               >
-            </label>
+            </div>
+
+            <router-link
+            to="/solicitacao"
+              ><span class="ml-8 lg:mr-[60px] text-sm font-medium text-gray-300"
+                >Solicitar de acesso</span
+              ></router-link
+            >
           </div>
 
           <button
@@ -86,36 +96,17 @@
             Login
           </button>
 
-        
-
-          <div class="LoginGoogle text-center mt-6">
-          <button
-            type="button"
-            class="mt-2 text-white bg-[#050708] hover:bg-[#050708]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 mb-2"
-          >
-            <svg
-              class="w-4 h-4 me-2"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 18 19"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M8.842 18.083a8.8 8.8 0 0 1-8.65-8.948 8.841 8.841 0 0 1 8.8-8.652h.153a8.464 8.464 0 0 1 5.7 2.257l-2.193 2.038A5.27 5.27 0 0 0 9.09 3.4a5.882 5.882 0 0 0-.2 11.76h.124a5.091 5.091 0 0 0 5.248-4.057L14.3 11H9V8h8.34c.066.543.095 1.09.088 1.636-.086 5.053-3.463 8.449-8.4 8.449l-.186-.002Z"
-                clip-rule="evenodd"
-              />
-            </svg>
-            Sign in with Google
-          </button>
-        </div>
-
-          <p class="pt-2 text-green-500">{{ messagem }}</p>
+          <div v-if="fail">
+            <div class="border-t border-gray-500 my-4"></div>
+            <p class="pt-2 text-red-200 text-center">{{ messagem }}</p>
+          </div>
         </form>
       </div>
     </div>
   </div>
 </template>
+
+
 
 <script>
 import axios from "axios";
@@ -128,9 +119,10 @@ export default {
       email: "",
       password: "",
       messagem: "",
-      success: false,
+      fail: false,
     };
   },
+
   methods: {
     login() {
       const authStore = useAuthStore();
@@ -154,7 +146,8 @@ export default {
           this.$router.push("/home");
         })
         .catch((error) => {
-          this.messagem = error;
+          this.fail = true;
+          this.messagem = "Email ou senha incorretos";
         });
     },
   },
@@ -180,5 +173,16 @@ export default {
 
   width: 490px;
   height: 542px;
+}
+
+@media screen and (max-width: 640px) {
+  .FormsLogin {
+    width: 350px;
+    height: 542px;
+  }
+
+  .fundoLogin {
+    padding-left: 15px;
+  }
 }
 </style>

@@ -4,6 +4,7 @@
 
         <h1 class="text-center mt-2 ">Total de usuários:</h1>
         <p class="text-center  mt-2">{{ totalUsuarios }}</p>
+        
     </div>
 </template>
 
