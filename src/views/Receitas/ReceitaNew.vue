@@ -4,9 +4,76 @@
       Nova Receita
     </h2>
     <h2 v-else class="text-2xl font-bold text-center mt-6">Editar Receita</h2>
-    <form @submit.prevent="submitForm" class="mt-2 ml-6 mr-6 space-y-4">
+    <form
+      v-if="isNewReceita"
+      @submit.prevent="submitForm"
+      class="mt-2 ml-6 mr-6 space-y-4"
+    >
       <div class="mb-3">
         <label for="name" class="block text-sm font-medium text-gray-700"
+          >Nome:</label
+        >
+        <input
+          class="mt-1 p-2 block w-full border rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:outline-none focus:ring-opacity-50"
+          type="text"
+          id="name"
+          v-model="nome"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="description" class="block text-sm font-medium text-gray-700"
+          >Detalhes:</label
+        >
+        <textarea
+          class="mt-1 p-2 block w-full border rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:outline-none focus:ring-opacity-50"
+          id="description"
+          v-model="detalhes"
+          required
+        ></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="price" class="block text-sm font-medium text-gray-700"
+          >Valor:</label
+        >
+        <input
+          class="mt-1 p-2 block w-full border rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:outline-none focus:ring-opacity-50"
+          type="number"
+          id="price"
+          v-model="valor"
+          required
+          placeholder="R$"
+        />
+      </div>
+
+      <label
+        for="countries"
+        class="block mb-2 text-sm font-medium text-gray-700"
+        >Categoria</label
+      >
+      <select
+        v-model="categoria"
+        id="countries"
+        class="mt-1 p-2 block w-full border rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:outline-none focus:ring-opacity-50"
+      >
+        <option>Pix</option>
+        <option>Projetos</option>
+        <option>Bônus</option>
+        <option>Salário</option>
+      </select>
+      <button
+        type="submit"
+        class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-green-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-green-700 focus:z-10 focus:ring-4 focus:ring-gray-200"
+      >
+        Adicionar Receita
+      </button>
+    </form>
+
+    <form v-else @submit.prevent="submitForm" class="mt-2 ml-6 mr-6 space-y-4">
+      <div class="mb-3">
+       
+      </div>
+      <!-- <label for="name" class="block text-sm font-medium text-gray-700"
           >Nome:</label
         >
         <input
@@ -45,19 +112,6 @@
         />
       </div>
 
-      <!-- <div class="mb-3">
-        <label for="categoria" class="block text-sm font-medium text-gray-700"
-          >Categoria</label
-        >
-        <input
-          class="mt-1 p-2 block w-full border rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:outline-none focus:ring-opacity-50"
-          type="text"
-          id="price"
-          v-model="categoria"
-          required
-        />
-      </div> -->
-
       <label
         for="countries"
         class="block mb-2 text-sm font-medium text-gray-700"
@@ -72,48 +126,32 @@
         <option>Projetos</option>
         <option>Bônus</option>
         <option>Salário</option>
-      </select>
+      </select> -->
       <button
         type="submit"
-        v-if="isNewReceita"
         class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-green-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-green-700 focus:z-10 focus:ring-4 focus:ring-gray-200"
       >
-        Adicionar Receita
-      </button>
-      <button
-        type="submit"
-        v-else
-        class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-green-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-green-700 focus:z-10 focus:ring-4 focus:ring-gray-200"
-      >
-        Atualizar Receita
+        Editar Receita
       </button>
     </form>
-
-    <Notification
-      v-if="showSuccessNotification"
-      message="Nova receita criada com sucesso!"
-      type="success"
-    />
-    <Notification
-      v-if="showErrorNotification"
-      message="Ocorreu um erro ao criar a receita."
-      type="error"
-    />
   </div>
 </template>
     
     <script>
 import axios from "axios";
-//   import Notification from '../Notification.vue';
 
 import { useUserStore } from "../../stores/UserStore";
-
+import { useReceitaStore } from "../../stores/ReceitaStore";
 export default {
   setup() {
     const userStore = useUserStore();
     const idUser = userStore.getUserId;
 
+    const receitaStore = useReceitaStore();
+    const receitaId = receitaStore.getReceitaId;
+
     return {
+      receitaId,
       idUser,
     };
   },
@@ -123,14 +161,10 @@ export default {
       detalhes: "",
       valor: "",
       categoria: "",
-
-      showSuccessNotification: false,
-      showErrorNotification: false,
+      receita: [],
     };
   },
-  components: {
-    // Notification,
-  },
+
   computed: {
     isNewReceita() {
       return !this.$route.path.includes("edit");
@@ -138,18 +172,19 @@ export default {
   },
   async created() {
     if (!this.isNewReceita) {
-      const response = await axios.get(
-        `http://127.0.0.1:8000/api/receita/receita/${this.$route.params.id}`
+     const response = await axios.get(
+        `http://127.0.0.1:8000/api/receita/${this.receitaId}/${this.idUser}`
       );
+
       this.receita = response.data;
+      console.log(this.receitaId)
     }
   },
   methods: {
     async submitForm() {
-      console.log(this.idUser);
       try {
         if (this.isNewReceita) {
-          await axios.post("http://127.0.0.1:8000/api/receita/criar-receita", {
+          await axios.post("http://127.0.0.1:8000/api/criar-receita", {
             nome: this.nome,
             detalhes: this.detalhes,
             valor: this.valor,
@@ -159,16 +194,10 @@ export default {
 
           this.showSuccessNotification = true;
           console.log("nova receita criada");
-        } else {
-          await axios.put(
-            `http://127.0.0.1:8000/api/receita/editar-receita/${this.$route.params.id}`,
-            this.receita
-          );
         }
         this.$router.push("/receitas");
       } catch (error) {
         console.error(error);
-        this.showErrorNotification = true;
       }
     },
   },

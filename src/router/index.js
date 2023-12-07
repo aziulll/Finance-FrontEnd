@@ -10,8 +10,6 @@ import ReceitaNew from '@/views/Receitas/ReceitaNew.vue'
 import Perfil from '@/views/Usuario/PerfilUsuario.vue'
 import Solicitacao from '@/views/Auth/Solicitacao.vue'
 
-import UsuariosList from '@/views/Usuario/UsuariosList.vue'
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -36,7 +34,6 @@ const router = createRouter({
 
 
 
-        { path: '/usuarios', component: UsuariosList },
         { path: '/perfil', component: Perfil }
 
       ]

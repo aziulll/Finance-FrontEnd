@@ -154,14 +154,18 @@
 <script>
 import axios from "axios";
 import { useUserStore } from "../../stores/UserStore";
+import { useReceitaStore } from "../../stores/ReceitaStore";
 import { ref, computed, onMounted } from "vue";
 
 export default {
   setup() {
     const userStore = useUserStore();
     const idUser = ref(userStore.getUserId);
+
+    const receitaStore = useReceitaStore();
+    const receitaId = ref(receitaStore.getReceitaId);
     
-    // Receitas
+
     const receitas = ref([]);  
     const perPage = 10;
     const currentPage = ref(1);
@@ -179,7 +183,7 @@ export default {
     const loadReceitas = async () => {
       try {
         const response = await axios.get(
-          `http://127.0.0.1:8000/api/receita/receita?user_id=${idUser.value}`
+          `http://127.0.0.1:8000/api/receita?user_id=${idUser.value}`
         );
         receitas.value = response.data.receitas; 
         console.log(response);
@@ -215,7 +219,7 @@ export default {
     const searchReceitas = () => {
       axios
         .get(
-          `http://127.0.0.1:8000/api/receita/pesquisar?termo_de_busca=${termoDeBusca.value}`
+          `http://127.0.0.1:8000/api/pesquisar?termo_de_busca=${termoDeBusca.value}`
         )
         .then((response) => {
           resultados.value = response.data;
@@ -226,6 +230,7 @@ export default {
     };
 
     return {
+      receitaId,
       idUser,
       receitas,
       perPage,

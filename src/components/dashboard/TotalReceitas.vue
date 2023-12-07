@@ -1,9 +1,9 @@
 <template>
-  <div class="w-auth-[100px] rounded-md drop-shadow-md border p-2 ">
-  <h1>Valor total - Receitas:</h1>
-  <span style="color: green ">R$ {{ totalValue }},00</span> 
-  </div>
-  
+<div>
+
+<p style="font-family: 'Dela Gothic One', cursive; color: gray;" class="text-center">R$ {{ totalValue }}</p>
+
+</div>
 </template>
 
 <script>
@@ -29,7 +29,7 @@ export default {
 
     try {
       axios
-        .get(`http://127.0.0.1:8000/api/receita/total/${userId}`)
+        .get(`http://127.0.0.1:8000/api/total/${userId}`)
         .then((response) => {
           this.totalValue = response.data;
         });
